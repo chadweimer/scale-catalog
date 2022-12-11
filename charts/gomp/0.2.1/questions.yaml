@@ -13,7 +13,6 @@ portals:
 
 questions:
   - variable: gomp
-    label: Configuration
     group: Configuration
     schema:
       type: dict
@@ -24,8 +23,7 @@ questions:
             type: dict
             attrs:
               - variable: tag
-                label: Override Container Image Tag
-                group: Container Image
+                label: Override Tag
                 schema:
                   type: string
                   default: ""
