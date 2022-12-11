@@ -15,7 +15,7 @@ portals:
     host:
       - "$node_ip"
     ports:
-      - "$variable-gomp_service_port"
+      - "$variable-gomp.service.port"
 
 questions:
   - variable: gomp
