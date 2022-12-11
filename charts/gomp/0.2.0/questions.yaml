@@ -1,6 +1,8 @@
 groups:
   - name: Container Image
     description: Image to be used for container
+  - name: Networking
+    description: Networking Configuration
 
 portals:
   open:
@@ -11,4 +13,20 @@ portals:
     ports:
       - "$kubernetes-resource_configmap_portal_port"
 
-questions: []
+questions:
+  - variable: gomp.image.tag
+    label: "Container Image Tag"
+    group: Container Image
+    schema:
+      type: string
+      default: "3.2.0"
+      required: true
+  - variable: gomp.service.port
+    label: "Web Port"
+    group: Networking
+    schema:
+      type: int
+      min: 3000
+      max: 65535
+      default: 5000
+      required: true
