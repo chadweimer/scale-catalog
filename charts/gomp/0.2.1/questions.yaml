@@ -19,23 +19,23 @@ questions:
       type: dict
       attrs:
         - variable: image
-          label: "Container Image"
+          label: Container Image
           schema:
             type: dict
             attrs:
               - variable: tag
-                label: "Override Container Image Tag"
+                label: Override Container Image Tag
                 group: Container Image
                 schema:
                   type: string
                   default: ""
         - variable: service
-          label: "Main Service"
+          label: Main Service
           schema:
             type: dict
             attrs:
               - variable: nodePort
-                label: "Web Port"
+                label: Web Port
                 schema:
                   type: int
                   min: 8000
@@ -43,12 +43,12 @@ questions:
                   default: 15000
                   required: true
         - variable: postgresql
-          label: "PostgreSQL"
+          label: PostgreSQL
           schema:
             type: dict
             attrs:
             - variable: enabled
-              label: "Enabled"
+              label: Enabled
               schema:
                 type: boolean
                 default: false
@@ -60,7 +60,7 @@ questions:
                       type: dict
                       attrs:
                         - variable: password
-                          label: "Web Port"
+                          label: Database Password
                           schema:
                             type: string
                             default: ""
