@@ -6,7 +6,7 @@ gomp:
     repository: cwmr/gomp
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "latest"
+    tag: ""
 
   imagePullSecrets: []
   nameOverride: ""
@@ -35,8 +35,8 @@ gomp:
     # runAsUser: 1000
 
   service:
-    type: ClusterIP
-    port: 80
+    type: NodePort
+    port: 5000
 
   ingress:
     enabled: false
@@ -135,7 +135,7 @@ gomp:
         #     subPath: sub/path
 
   postgresql:
-    enabled: true
+    enabled: false
     auth:
       database: gomp
       username: gomp

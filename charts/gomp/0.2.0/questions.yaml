@@ -3,6 +3,8 @@ groups:
     description: Image to be used for container
   - name: Networking
     description: Networking Configuration
+  - name: Database
+    description: Database Configuration
 
 portals:
   open:
@@ -15,12 +17,11 @@ portals:
 
 questions:
   - variable: gomp.image.tag
-    label: "Container Image Tag"
+    label: "Override Container Image Tag"
     group: Container Image
     schema:
       type: string
-      default: "3.2.0"
-      required: true
+      default: ""
   - variable: gomp.service.port
     label: "Web Port"
     group: Networking
@@ -30,3 +31,9 @@ questions:
       max: 65535
       default: 5000
       required: true
+  - variable: gomp.portgresql.enabled
+    label: "PostgreSQL Enabled"
+    group: Database
+    schema:
+      type: boolean
+      default: false
