@@ -16,24 +16,45 @@ portals:
       - "$variable-gomp_service_port"
 
 questions:
-  - variable: gomp.image.tag
-    label: "Override Container Image Tag"
-    group: Container Image
+  - variable: gomp
+    label: "Application Configuration"
     schema:
-      type: string
-      default: ""
-  - variable: gomp.service.port
-    label: "Web Port"
-    group: Networking
-    schema:
-      type: int
-      min: 3000
-      max: 65535
-      default: 5000
-      required: true
-  - variable: gomp.portgresql.enabled
-    label: "PostgreSQL Enabled"
-    group: Database
-    schema:
-      type: boolean
-      default: false
+      type: dict
+      attrs:
+        - variable: image
+          label: "Container Image"
+          group: Container Image
+          schema:
+            type: dict
+            attrs:
+              - variable: tag
+                label: "Override Container Image Tag"
+                group: Container Image
+                schema:
+                  type: string
+                  default: ""
+        - variable: service
+          label: "Main Service"
+          group: Networking
+          schema:
+            type: dict
+            attrs:
+              - variable: port
+                label: "Web Port"
+                schema:
+                  type: int
+                  min: 3000
+                  max: 65535
+                  default: 5000
+                  required: true
+        - variable: postgresql
+          label: "PostgreSQL"
+          group: Database
+          schema:
+            type: dict
+            attrs:
+            - variable: enabled
+              label: "Enabled"
+              schema:
+                type: boolean
+                default: false
