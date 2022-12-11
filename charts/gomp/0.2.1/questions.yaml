@@ -13,6 +13,7 @@ portals:
 
 questions:
   - variable: gomp
+    label: Application Configuration
     group: Configuration
     schema:
       type: dict
