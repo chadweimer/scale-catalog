@@ -1,4 +1,6 @@
 groups:
+  - name: Application Configuration
+    description: Application Configuration
   - name: Container Image
     description: Image to be used for container
   - name: Networking
@@ -18,6 +20,7 @@ portals:
 questions:
   - variable: gomp
     label: "Application Configuration"
+    group: Application Configuration
     schema:
       type: dict
       attrs:
