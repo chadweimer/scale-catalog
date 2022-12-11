@@ -9,11 +9,11 @@ groups:
 portals:
   open:
     protocols:
-      - "$kubernetes-resource_configmap_portal_protocol"
+      - "http"
     host:
-      - "$kubernetes-resource_configmap_portal_host"
+      - "$node_ip"
     ports:
-      - "$kubernetes-resource_configmap_portal_port"
+      - "$variable-gomp_service_port"
 
 questions:
   - variable: gomp.image.tag
