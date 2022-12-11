@@ -15,7 +15,7 @@ portals:
     host:
       - "$node_ip"
     ports:
-      - "$variable-gomp.service.port"
+      - "$variable-gomp.service.nodePort"
 
 questions:
   - variable: gomp
@@ -42,13 +42,13 @@ questions:
           schema:
             type: dict
             attrs:
-              - variable: port
+              - variable: nodePort
                 label: "Web Port"
                 schema:
                   type: int
-                  min: 3000
+                  min: 8000
                   max: 65535
-                  default: 5000
+                  default: 15000
                   required: true
         - variable: postgresql
           label: "PostgreSQL"

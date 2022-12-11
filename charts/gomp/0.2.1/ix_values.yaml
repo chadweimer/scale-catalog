@@ -37,6 +37,7 @@ gomp:
   service:
     type: NodePort
     port: 5000
+    nodePort: 15000
 
   ingress:
     enabled: false
