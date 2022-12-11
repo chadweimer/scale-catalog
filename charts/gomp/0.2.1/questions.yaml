@@ -1,12 +1,6 @@
 groups:
-  - name: Application Configuration
-    description: Application Configuration
-  - name: Container Image
-    description: Image to be used for container
-  - name: Networking
-    description: Networking Configuration
-  - name: Database
-    description: Database Configuration
+  - name: Configuration
+    description: Configuration
 
 portals:
   open:
@@ -19,14 +13,13 @@ portals:
 
 questions:
   - variable: gomp
-    label: "Application Configuration"
-    group: Application Configuration
+    label: Configuration
+    group: Configuration
     schema:
       type: dict
       attrs:
         - variable: image
           label: "Container Image"
-          group: Container Image
           schema:
             type: dict
             attrs:
@@ -38,7 +31,6 @@ questions:
                   default: ""
         - variable: service
           label: "Main Service"
-          group: Networking
           schema:
             type: dict
             attrs:
@@ -52,7 +44,6 @@ questions:
                   required: true
         - variable: postgresql
           label: "PostgreSQL"
-          group: Database
           schema:
             type: dict
             attrs:
@@ -61,3 +52,16 @@ questions:
               schema:
                 type: boolean
                 default: false
+                show_subquestions_if: true
+                subquestions:
+                  - variable: auth
+                    label: Authentication
+                    schema:
+                      type: dict
+                      attrs:
+                        - variable: password
+                          label: "Web Port"
+                          schema:
+                            type: string
+                            default: ""
+                            required: true
