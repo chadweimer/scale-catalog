@@ -1,0 +1,14 @@
+groups:
+  - name: Container Image
+    description: Image to be used for container
+
+portals:
+  open:
+    protocols:
+      - "$kubernetes-resource_configmap_portal_protocol"
+    host:
+      - "$kubernetes-resource_configmap_portal_host"
+    ports:
+      - "$kubernetes-resource_configmap_portal_port"
+
+questions: []
