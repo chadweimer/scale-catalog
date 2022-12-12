@@ -1,6 +1,0 @@
-dependencies:
-- name: gomp
-  repository: https://chadweimer.github.io/charts
-  version: 0.2.2
-digest: sha256:e904119cbe4fd3465635dc1adefa9c4d8f7f462973b0798234b75cabbef17f00
-generated: "2022-12-12T21:50:04.290997685Z"
