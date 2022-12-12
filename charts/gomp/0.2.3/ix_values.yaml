@@ -94,8 +94,8 @@ gomp:
 
   gomp:
     probes:
-      liveness: "/ping"
-      readiness: "/ping"
+      liveness: "/"
+      readiness: "/"
     env: []
     secureKey: ChangeMe
     existingSecret: ""
