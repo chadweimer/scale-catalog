@@ -2,11 +2,11 @@ apiVersion: v2
 name: gomp
 description: Web-based recipe book
 type: application
-version: 0.2.3
+version: 0.2.4
 appVersion: "3.2.0"
 dependencies:
 - name: gomp
-  version: "0.2.3"
+  version: "0.2.4"
   repository: "https://chadweimer.github.io/charts"
 sources:
   - https://github.com/chadweimer/gomp
