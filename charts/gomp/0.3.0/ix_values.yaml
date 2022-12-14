@@ -8,10 +8,6 @@ gomp:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
-  imagePullSecrets: []
-  nameOverride: ""
-  fullnameOverride: ""
-
   serviceAccount:
     # Specifies whether a service account should be created
     create: true
@@ -20,19 +16,9 @@ gomp:
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
     name: ""
-
-  podAnnotations: {}
-
-  podSecurityContext: {}
-    # fsGroup: 2000
-
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  
+  podSecurityContext:
+    fsGroup: 568
 
   service:
     type: NodePort
@@ -89,12 +75,6 @@ gomp:
     targetCPUUtilizationPercentage: 80
     # targetMemoryUtilizationPercentage: 80
 
-  nodeSelector: {}
-
-  tolerations: []
-
-  affinity: {}
-
   gomp:
     probes:
       liveness: "/"
@@ -148,7 +128,12 @@ gomp:
     service:
       ports:
         postgresql: 5432
-    # primary:
+    primary:
+        podSecurityContext:
+          enabled: true
+          fsGroup: 568
+        containerSecurityContext:
+          enabled: false
     #   extraVolumes:
     #     - name: customData
     #       hostPath:
