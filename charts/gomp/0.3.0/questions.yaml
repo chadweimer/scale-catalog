@@ -90,37 +90,37 @@ questions:
                         type: hostpath
                         required: true
                         show_if: [["type", "=", "hostPath"]]
-        - variable: resources
-          label: Resources
+        - variable: setResourcesEnabled
+          label: Set Pod resources
           schema:
-            type: dict
-            attrs:
-              - variable: limits
-                label: Limits
+            type: boolean
+            default: false
+            show_subquestions_if: true
+            subquestions:
+              - variable: resources
+                label: Resources
                 schema:
                   type: dict
                   attrs:
-                    - variable: enableResourceLimits
-                      label: Enable Pod resource limits
+                    - variable: limits
+                      label: Limits
                       schema:
-                        type: boolean
-                        default: false
-                    - variable: cpu
-                      label: CPU
-                      description: CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100.
-                      schema:
-                        type: string
-                        valid_chars: "^\\d+(?:\\.\\d+(?!.*m$)|m?$)"
-                        default: 1000m
-                        show_if: [["enableResourceLimits", "=", true]]
-                    - variable: memory
-                      label: Memory
-                      description: Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi
-                      schema:
-                        type: string
-                        valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
-                        default: "1Gi"
-                        show_if: [["enableResourceLimits", "=", true]]
+                        type: dict
+                        attrs:
+                          - variable: cpu
+                            label: CPU
+                            description: CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100.
+                            schema:
+                              type: string
+                              valid_chars: "^\\d+(?:\\.\\d+(?!.*m$)|m?$)"
+                              default: 1000m
+                          - variable: memory
+                            label: Memory
+                            description: Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi
+                            schema:
+                              type: string
+                              valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
+                              default: "1Gi"
         - variable: postgresql
           label: PostgreSQL
           schema:
