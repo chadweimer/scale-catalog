@@ -130,10 +130,15 @@ questions:
                                     required: true
                                 - variable: hostPath
                                   label: Host Path
-                                  description: Select the host path
                                   schema:
-                                    type: hostpath
-                                    required: true
+                                    type: dict
+                                    attrs:
+                                      - variable: path
+                                        label: Path
+                                        description: Select the host path
+                                        schema:
+                                          type: hostpath
+                                          required: true
                     - variable: extraVolumeMounts
                       label: Extra Host Path Volume Mounts
                       description: MUST have a corresponding Host Path Volume defined
