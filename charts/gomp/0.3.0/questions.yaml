@@ -58,10 +58,10 @@ questions:
                     - value: hostPath
                       description: Host Path
               - variable: hostPath
-                  label: "Host Path"
-                  schema:
-                    type: hostPath
-                    show_if: [["type", "=", "hostPath"]]
+                label: "Host Path"
+                schema:
+                  type: hostPath
+                  show_if: [["type", "=", "hostPath"]]
         - variable: postgresql
           label: PostgreSQL
           schema:
