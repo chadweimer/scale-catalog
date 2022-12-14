@@ -61,7 +61,7 @@ questions:
                 label: Host Path
                 description: Select the host path
                 schema:
-                  type: hostPath
+                  type: hostpath
                   show_if: [["type", "=", "hostPath"]]
         - variable: postgresql
           label: PostgreSQL
