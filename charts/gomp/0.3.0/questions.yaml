@@ -46,23 +46,28 @@ questions:
           schema:
             type: dict
             attrs:
-              - variable: type
-                label: Type of Storage
-                description: Sets the persistence type
+              - variable: data
+                label: Application Data
                 schema:
-                  type: string
-                  default: pvc
-                  enum:
-                    - value: pvc
-                      description: PVC
-                    - value: hostPath
-                      description: Host Path
-              - variable: hostPath
-                label: Host Path
-                description: Select the host path
-                schema:
-                  type: hostpath
-                  show_if: [["type", "=", "hostPath"]]
+                  type: dict
+                  attrs:
+                    - variable: type
+                      label: Type of Storage
+                      description: Sets the persistence type
+                      schema:
+                        type: string
+                        default: pvc
+                        enum:
+                          - value: pvc
+                            description: PVC
+                          - value: hostPath
+                            description: Host Path
+                    - variable: hostPath
+                      label: Host Path
+                      description: Select the host path
+                      schema:
+                        type: hostpath
+                        show_if: [["type", "=", "hostPath"]]
         - variable: postgresql
           label: PostgreSQL
           schema:
