@@ -41,6 +41,26 @@ questions:
                   max: 65535
                   default: 15000
                   required: true
+        - variable: persistence
+          label: Storage
+          schema: dict
+          attrs:
+            - variable: type
+              label: Type of Storage
+              description: Sets the persistence type
+              schema:
+                type: string
+                default: pvc
+                enum:
+                  - value: pvc
+                    description: PVC
+                  - value: hostPath
+                    description: Host Path
+            - variable: hostPath
+                label: "Host Path"
+                schema:
+                  type: hostPath
+                  show_if: [["type", "=", "hostPath"]]
         - variable: postgresql
           label: PostgreSQL
           schema:
