@@ -150,12 +150,12 @@ questions:
                   show_if: [["enabled", "=", true]]
                   attrs:
                     - variable: persistence
-                      label: Default Storage (PVC)
+                      label: Storage
                       schema:
                         type: dict
                         attrs:
                           - variable: enabled
-                            label: Enabled
+                            label: Enable Default Storage (PVC)
                             schema:
                               type: boolean
                               default: true
