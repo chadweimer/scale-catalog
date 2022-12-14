@@ -57,6 +57,7 @@ questions:
                       schema:
                         type: string
                         default: pvc
+                        required: true
                         enum:
                           - value: pvc
                             description: PVC
@@ -67,27 +68,87 @@ questions:
                       description: Select the host path
                       schema:
                         type: hostpath
+                        required: true
                         show_if: [["type", "=", "hostPath"]]
         - variable: postgresql
           label: PostgreSQL
           schema:
             type: dict
             attrs:
-            - variable: enabled
-              label: Enabled
-              schema:
-                type: boolean
-                default: false
-                show_subquestions_if: true
-                subquestions:
-                  - variable: auth
-                    label: Authentication
-                    schema:
-                      type: dict
-                      attrs:
-                        - variable: password
-                          label: Database Password
-                          schema:
-                            type: string
-                            default: ""
-                            required: true
+              - variable: enabled
+                label: Enabled
+                schema:
+                  type: boolean
+                  default: false
+                  required: true
+              - variable: auth
+                label: Authentication
+                schema:
+                  type: dict
+                  show_if: [["enabled", "=", true]]
+                  attrs:
+                    - variable: password
+                      label: Database Password
+                      schema:
+                        type: string
+                        default: ""
+                        required: true
+              - variable: primary
+                label: Primary
+                schema:
+                  type: dict
+                  show_if: [["enabled", "=", true]]
+                  attrs:
+                    - variable: primary
+                      label: Primary
+                      schema:
+                        type: dict
+                        attrs:
+                          - variable: persistence
+                            label: Primary Persistence Enabled
+                            schema:
+                              type: boolean
+                              default: true
+                              required: true
+                    - variable: extraVolumes
+                      label: Extra Host Path Volumes
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: name
+                            label: Volume Name
+                            schema:
+                              type: string
+                              default: ""
+                              required: true
+                          - variable: hostPath
+                            label: Host Path
+                            description: Select the host path
+                            schema:
+                              type: hostpath
+                              required: true
+                    - variable: extraVolumeMounts
+                      label: Extra Host Path Volume Mounts
+                      description: MUST have a corresponding Host Path Volume defined
+                      schema:
+                        type: list
+                        default: []
+                        items:
+                          - variable: name
+                            label: Volume Name
+                            schema:
+                              type: string
+                              default: ""
+                              required: true
+                          - variable: mountPath
+                            label: Mount Path
+                            schema:
+                              type: path
+                              required: true
+                          - variable: subPath
+                            label: Mount Sub-Path
+                            schema:
+                              type: string
+                              default: ""
+                              required: false

@@ -148,3 +148,12 @@ gomp:
     service:
       ports:
         postgresql: 5432
+    # primary:
+    #   extraVolumes:
+    #     - name: customData
+    #       hostPath:
+    #         path: ""
+    #   extraVolumeMounts:
+    #     - name: customData
+    #       mountPath: /bitnami/postgresql
+    #       subPath: ""
