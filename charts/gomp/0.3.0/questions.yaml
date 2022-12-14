@@ -99,22 +99,17 @@ questions:
                   type: dict
                   show_if: [["enabled", "=", true]]
                   attrs:
-                    - variable: primary
-                      label: Primary
+                    - variable: persistence
+                      label: Default Storage (PVC)
                       schema:
                         type: dict
                         attrs:
-                          - variable: persistence
-                            label: Primary Persistence
+                          - variable: enabled
+                            label: Enabled
                             schema:
-                              type: dict
-                              attrs:
-                                - variable: enabled
-                                  label: Enabled
-                                  schema:
-                                    type: boolean
-                                    default: true
-                                    required: true
+                              type: boolean
+                              default: true
+                              required: true
                     - variable: extraVolumes
                       label: Extra Host Path Volumes
                       schema:
