@@ -116,18 +116,24 @@ questions:
                         type: list
                         default: []
                         items:
-                          - variable: name
-                            label: Volume Name
+                          - variable: extraVolumesEntry
+                            label: Custom Volume
                             schema:
-                              type: string
-                              default: ""
-                              required: true
-                          - variable: hostPath
-                            label: Host Path
-                            description: Select the host path
-                            schema:
-                              type: hostpath
-                              required: true
+                              additional_attrs: true
+                              type: dict
+                              attrs:
+                                - variable: name
+                                  label: Volume Name
+                                  schema:
+                                    type: string
+                                    default: ""
+                                    required: true
+                                - variable: hostPath
+                                  label: Host Path
+                                  description: Select the host path
+                                  schema:
+                                    type: hostpath
+                                    required: true
                     - variable: extraVolumeMounts
                       label: Extra Host Path Volume Mounts
                       description: MUST have a corresponding Host Path Volume defined
@@ -135,20 +141,26 @@ questions:
                         type: list
                         default: []
                         items:
-                          - variable: name
-                            label: Volume Name
+                          - variable: extraVolumeMountsEntry
+                            label: Custom Volume Mount
                             schema:
-                              type: string
-                              default: ""
-                              required: true
-                          - variable: mountPath
-                            label: Mount Path
-                            schema:
-                              type: path
-                              required: true
-                          - variable: subPath
-                            label: Mount Sub-Path
-                            schema:
-                              type: string
-                              default: ""
-                              required: false
+                              additional_attrs: true
+                              type: dict
+                              attrs:
+                                - variable: name
+                                  label: Volume Name
+                                  schema:
+                                    type: string
+                                    default: ""
+                                    required: true
+                                - variable: mountPath
+                                  label: Mount Path
+                                  schema:
+                                    type: path
+                                    required: true
+                                - variable: subPath
+                                  label: Mount Sub-Path
+                                  schema:
+                                    type: string
+                                    default: ""
+                                    required: false
