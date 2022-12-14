@@ -58,7 +58,8 @@ questions:
                     - value: hostPath
                       description: Host Path
               - variable: hostPath
-                label: "Host Path"
+                label: Host Path
+                description: Select the host path
                 schema:
                   type: hostPath
                   show_if: [["type", "=", "hostPath"]]
