@@ -131,89 +131,89 @@ questions:
                 schema:
                   type: boolean
                   default: false
-              - variable: auth
-                label: Authentication
-                schema:
-                  type: dict
-                  show_if: [["enabled", "=", true]]
-                  attrs:
-                    - variable: password
-                      label: Database Password
-                      schema:
-                        type: string
-                        default: ""
-                        required: true
-              - variable: primary
-                label: Primary
-                schema:
-                  type: dict
-                  show_if: [["enabled", "=", true]]
-                  attrs:
-                    - variable: persistence
-                      label: Storage
+                  show_subquestions_if: true
+                  subquestions:
+                    - variable: auth
+                      label: Authentication
                       schema:
                         type: dict
                         attrs:
-                          - variable: enabled
-                            label: Enable Default Storage (PVC)
+                          - variable: password
+                            label: Database Password
                             schema:
-                              type: boolean
-                              default: true
-                    - variable: extraVolumes
-                      label: Extra Host Path Volumes
+                              type: string
+                              default: ""
+                              required: true
+                    - variable: primary
+                      label: Primary
                       schema:
-                        type: list
-                        default: []
-                        items:
-                          - variable: extraVolumesEntry
-                            label: Custom Volume
+                        type: dict
+                        attrs:
+                          - variable: persistence
+                            label: Storage
                             schema:
-                              additional_attrs: true
                               type: dict
                               attrs:
-                                - variable: name
-                                  label: Volume Name
+                                - variable: enabled
+                                  label: Enable Default Storage (PVC)
                                   schema:
-                                    type: string
-                                    default: ""
-                                    required: true
-                                - variable: hostPath
-                                  label: Host Path
+                                    type: boolean
+                                    default: true
+                          - variable: extraVolumes
+                            label: Extra Host Path Volumes
+                            schema:
+                              type: list
+                              default: []
+                              items:
+                                - variable: extraVolumesEntry
+                                  label: Custom Volume
                                   schema:
+                                    additional_attrs: true
                                     type: dict
                                     attrs:
-                                      - variable: path
-                                        label: Path
-                                        description: Select the host path
+                                      - variable: name
+                                        label: Volume Name
                                         schema:
-                                          type: hostpath
+                                          type: string
+                                          default: ""
                                           required: true
-                    - variable: extraVolumeMounts
-                      label: Extra Host Path Volume Mounts
-                      description: MUST have a corresponding Host Path Volume defined
-                      schema:
-                        type: list
-                        default: []
-                        items:
-                          - variable: extraVolumeMountsEntry
-                            label: Custom Volume Mount
+                                      - variable: hostPath
+                                        label: Host Path
+                                        schema:
+                                          type: dict
+                                          attrs:
+                                            - variable: path
+                                              label: Path
+                                              description: Select the host path
+                                              schema:
+                                                type: hostpath
+                                                required: true
+                          - variable: extraVolumeMounts
+                            label: Extra Host Path Volume Mounts
+                            description: MUST have a corresponding Host Path Volume defined
                             schema:
-                              additional_attrs: true
-                              type: dict
-                              attrs:
-                                - variable: name
-                                  label: Volume Name
+                              type: list
+                              default: []
+                              items:
+                                - variable: extraVolumeMountsEntry
+                                  label: Custom Volume Mount
                                   schema:
-                                    type: string
-                                    default: ""
-                                    required: true
-                                - variable: mountPath
-                                  label: Mount Path
-                                  schema:
-                                    type: path
-                                    required: true
-                                - variable: subPath
-                                  label: Mount Sub-Path
-                                  schema:
-                                    type: string
-                                    default: ""
+                                    additional_attrs: true
+                                    type: dict
+                                    attrs:
+                                      - variable: name
+                                        label: Volume Name
+                                        schema:
+                                          type: string
+                                          default: ""
+                                          required: true
+                                      - variable: mountPath
+                                        label: Mount Path
+                                        schema:
+                                          type: path
+                                          required: true
+                                      - variable: subPath
+                                        label: Mount Sub-Path
+                                        schema:
+                                          type: string
+                                          default: ""
