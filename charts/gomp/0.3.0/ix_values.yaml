@@ -19,6 +19,9 @@ gomp:
   
   podSecurityContext:
     fsGroup: 568
+  
+  securityContext:
+    runAsUser: 568
 
   service:
     type: NodePort
@@ -129,11 +132,12 @@ gomp:
       ports:
         postgresql: 5432
     primary:
-        podSecurityContext:
-          enabled: true
-          fsGroup: 568
-        containerSecurityContext:
-          enabled: false
+      podSecurityContext:
+        enabled: true
+        fsGroup: 568
+      containerSecurityContext:
+        enabled: true
+        runAsUser: 568
     #   extraVolumes:
     #     - name: customData
     #       hostPath:
