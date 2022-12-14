@@ -105,11 +105,16 @@ questions:
                         type: dict
                         attrs:
                           - variable: persistence
-                            label: Primary Persistence Enabled
+                            label: Primary Persistence
                             schema:
-                              type: boolean
-                              default: true
-                              required: true
+                              type: dict
+                              attrs:
+                                - variable: enabled
+                                  label: Enabled
+                                  schema:
+                                    type: boolean
+                                    default: true
+                                    required: true
                     - variable: extraVolumes
                       label: Extra Host Path Volumes
                       schema:
