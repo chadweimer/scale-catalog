@@ -28,6 +28,18 @@ questions:
                 schema:
                   type: string
                   default: ""
+        - variable: gomp
+          label: Settings
+          schema:
+            type: dict
+            attrs:
+              - variable: secureKey
+                label: Secure Key
+                description: Used for encrypting tokens
+                schema:
+                  type: string
+                  default: ""
+                  required: true
         - variable: service
           label: Main Service
           schema:
@@ -63,6 +75,14 @@ questions:
                             description: PVC
                           - value: hostPath
                             description: Host Path
+                    - variable: size
+                      label: PVC Size
+                      description: Set the PVC size
+                      schema:
+                        type: string
+                        valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
+                        default: 1Gi
+                        show_if: [["type", "=", "pvc"]]
                     - variable: hostPath
                       label: Host Path
                       description: Select the host path
@@ -70,6 +90,37 @@ questions:
                         type: hostpath
                         required: true
                         show_if: [["type", "=", "hostPath"]]
+        - variable: resources
+          label: Resources
+          schema:
+            type: dict
+            attrs:
+              - variable: limits
+                label: Limits
+                schema:
+                  type: dict
+                  attrs:
+                    - variable: enableResourceLimits
+                      label: Enable Pod resource limits
+                      schema:
+                        type: boolean
+                        default: false
+                    - variable: cpu
+                      label: CPU
+                      description: CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100.
+                      schema:
+                        type: string
+                        valid_chars: "^\\d+(?:\\.\\d+(?!.*m$)|m?$)"
+                        default: 1000m
+                        show_if: [["enableResourceLimits", "=", true]]
+                    - variable: memory
+                      label: Memory
+                      description: Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi
+                      schema:
+                        type: string
+                        valid_chars: "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$"
+                        default: "1Gi"
+                        show_if: [["enableResourceLimits", "=", true]]
         - variable: postgresql
           label: PostgreSQL
           schema:
@@ -80,7 +131,6 @@ questions:
                 schema:
                   type: boolean
                   default: false
-                  required: true
               - variable: auth
                 label: Authentication
                 schema:
@@ -109,7 +159,6 @@ questions:
                             schema:
                               type: boolean
                               default: true
-                              required: true
                     - variable: extraVolumes
                       label: Extra Host Path Volumes
                       schema:
@@ -168,4 +217,3 @@ questions:
                                   schema:
                                     type: string
                                     default: ""
-                                    required: false
