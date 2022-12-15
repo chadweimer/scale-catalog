@@ -40,6 +40,29 @@ questions:
                   type: string
                   default: ""
                   required: true
+              - variable: env
+                label: Environment Variables
+                schema:
+                  type: list
+                  items:
+                    - variable: envEntry
+                      label: Environment Variable
+                      schema:
+                        additional_attrs: true
+                        type: dict
+                        attrs:
+                          - variable: name
+                            label: Name
+                            schema:
+                              type: string
+                              default: ""
+                              required: true
+                          - variable: value
+                            label: Value
+                            schema:
+                              type: string
+                              default: ""
+                              required: true
         - variable: service
           label: Main Service
           schema:

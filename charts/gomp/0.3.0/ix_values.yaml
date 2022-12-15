@@ -29,14 +29,8 @@ gomp:
   persistence:
     data:
       enabled: true
-      # type: hostPath
-      # hostPath: /path/on/host
 
   gomp:
-    env: []
-    secureKey: ChangeMe
-    uploads:
-      driver: fs
     aws:
       auth:
         accessKeyId: ""
@@ -72,9 +66,6 @@ gomp:
         #     subPath: sub/path
 
   postgresql:
-    enabled: false
-    auth:
-      password: ChangeMe
     primary:
       podSecurityContext:
         enabled: true
@@ -82,11 +73,3 @@ gomp:
       containerSecurityContext:
         enabled: true
         runAsUser: 568
-    #   extraVolumes:
-    #     - name: customData
-    #       hostPath:
-    #         path: ""
-    #   extraVolumeMounts:
-    #     - name: customData
-    #       mountPath: /bitnami/postgresql
-    #       subPath: ""
