@@ -154,27 +154,6 @@ stringData:
     set -euo pipefail
 
 
-    # Connection retry inspired by https://gist.github.com/dublx/e99ea94858c07d2ca6de
-    function test_db_connection() {
-      local RETRY=0
-      local MAX=30
-
-      echo 'Wait for database to become avialable...'
-      until [ "${RETRY}" -ge "${MAX}" ]; do
-        nc -vz -w2 {{ printf "%v-%v" .Release.Name "postgresql" }} 5432 && break
-        RETRY=$[${RETRY}+1]
-        echo "...not ready yet (${RETRY}/${MAX})"
-      done
-
-      if [ "${RETRY}" -ge "${MAX}" ]; then
-        echo "Database not reachable after '${MAX}' attempts!"
-        exit 1
-      fi
-    }
-
-    test_db_connection
-
-
     echo '==== BEGIN GITEA MIGRATION ===='
 
     gitea migrate
