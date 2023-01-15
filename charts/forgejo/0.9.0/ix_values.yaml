@@ -124,10 +124,11 @@ config:
   nodeIP: 127.0.0.1
 
 customConfig:
-  - name: service
-    keys:
-      - name: DISABLE_REGISTRATION
-        value: true
+  []
+  # - name: test
+  #   keys:
+  #     - name: testkey
+  #       value: testvalue
 
 # --  memcached dependency settings
 memcached:
