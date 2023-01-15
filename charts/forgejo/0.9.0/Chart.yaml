@@ -1,0 +1,30 @@
+apiVersion: v2
+appVersion: "1.18.0"
+dependencies:
+  - name: common
+    repository: https://library-charts.truecharts.org
+    version: 11.1.2
+  - condition: memcached.enabled
+    name: memcached
+    repository: https://charts.truecharts.org/
+    version: 5.0.19
+deprecated: false
+description: Self hosted GIT repositories
+home: https://github.com/chadweimer/charts/charts/forgejo
+icon: https://codeberg.org/forgejo/forgejo/raw/branch/forgejo/assets/logo.svg
+keywords:
+  - git
+  - issue tracker
+  - code review
+  - wiki
+  - gitea
+  - gogs
+kubeVersion: ">=1.16.0-0"
+name: forgejo
+sources:
+  - https://github.com/truecharts/charts/tree/master/charts/stable/gitea
+  - https://gitea.com/gitea/helm-chart
+  - https://codeberg.org/forgejo/forgejo
+  - https://codeberg.org/forgejo/-/packages/container/forgejo
+type: application
+version: 0.9.0

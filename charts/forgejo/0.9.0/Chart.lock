@@ -1,0 +1,9 @@
+dependencies:
+- name: common
+  repository: https://library-charts.truecharts.org
+  version: 11.1.2
+- name: memcached
+  repository: https://charts.truecharts.org/
+  version: 5.0.19
+digest: sha256:e7cb92a9cc529abb5c0dccfd4e983e1ed508dac607e7938c4de09d21af031217
+generated: "2023-01-15T17:53:46.029361828Z"
