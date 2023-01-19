@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: "1.18.0"
+appVersion: "1.18.1"
 dependencies:
   - name: common
     repository: https://library-charts.truecharts.org
@@ -27,4 +27,4 @@ sources:
   - https://codeberg.org/forgejo/forgejo
   - https://codeberg.org/forgejo/-/packages/container/forgejo
 type: application
-version: 1.0.0
+version: 1.0.1
