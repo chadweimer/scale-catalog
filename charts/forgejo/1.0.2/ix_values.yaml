@@ -1,6 +1,6 @@
 image:
   repository: codeberg.org/forgejo/forgejo
-  tag: 1.18.1-0-rootless@sha256:fde422c305cb5e3808940022cbad36cb58e03cb9ce08461349c2d82619be9671
+  tag: 1.18.2-1-rootless@sha256:6f896cc08d3d341ba3e4c87d168418cf655002b583ed4a7a2596635e86f7c28a
   pullPolicy: IfNotPresent
 
 podSecurityContext:
@@ -129,6 +129,13 @@ customConfig:
   #   keys:
   #     - name: testkey
   #       value: testvalue
+
+# Enabled postgres
+# postgresql:
+#   enabled: true
+#   existingSecret: "dbcreds"
+#   postgresqlUsername: gitea
+#   postgresqlDatabase: gitea
 
 # --  memcached dependency settings
 memcached:

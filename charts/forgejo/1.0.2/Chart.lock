@@ -4,6 +4,6 @@ dependencies:
   version: 11.1.2
 - name: memcached
   repository: https://charts.truecharts.org/
-  version: 5.0.19
-digest: sha256:e7cb92a9cc529abb5c0dccfd4e983e1ed508dac607e7938c4de09d21af031217
-generated: "2023-01-15T17:53:46.029361828Z"
+  version: 5.0.24
+digest: sha256:4833fca262e4bf36be4535e490be89a0ec797488e0268326ccae01ab85dc68e2
+generated: "2023-01-29T21:15:29.691196178Z"

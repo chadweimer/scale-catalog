@@ -779,10 +779,17 @@ questions:
                                                 type: string
                                                 required: true
                                                 default: Prefix
+                    - variable: clusterIssuer
+                      label: clusterIssuer
+                      description: 'add the name of your cert-manager clusterIssuer here for automatic tls certificates. Cannot be used combined with tls option below'
+                      schema:
+                        type: string
+                        default: ""
                     - variable: tls
                       label: TLS-Settings
                       schema:
                         type: list
+                        show_if: [["clusterIssuer", "=", ""]]
                         default: []
                         items:
                           - variable: tlsEntry
@@ -803,12 +810,26 @@ questions:
                                           type: string
                                           default: ""
                                           required: true
-                                - variable: scaleCert
-                                  label: Select TrueNAS SCALE Certificate
+
+                                - variable: clusterIssuer
+                                  label: Use Cert-Manager clusterIssuer
+                                  description: 'add the name of your cert-manager clusterIssuer here for automatic tls certificates.'
                                   schema:
+                                    type: string
+                                    default: ""
+                                - variable: scaleCert
+                                  label: Use TrueNAS SCALE Certificate (Deprecated)
+                                  schema:
+                                    show_if: [["clusterIssuer", "=", ""]]
                                     type: int
                                     $ref:
                                       - "definitions/certificate"
+                                - variable: secretName
+                                  label: Use Custom Secret (Advanced)
+                                  schema:
+                                    show_if: [["clusterIssuer", "=", ""]]
+                                    type: string
+                                    default: ""
                     - variable: entrypoint
                       label: (Advanced) Traefik Entrypoint
                       description: Entrypoint used by Traefik when using Traefik as Ingress Provider
@@ -920,11 +941,18 @@ questions:
                                               label: Service Port
                                               schema:
                                                 type: int
+              - variable: clusterIssuer
+                label: clusterIssuer
+                description: 'add the name of your cert-manager clusterIssuer here for automatic tls certificates. Cannot be used combined with tls option below'
+                schema:
+                  type: string
+                  default: ""
               - variable: tls
                 label: TLS-Settings
                 schema:
                   type: list
                   default: []
+                  show_if: [["clusterIssuer", "=", ""]]
                   items:
                     - variable: tlsEntry
                       label: Host
@@ -944,12 +972,25 @@ questions:
                                     type: string
                                     default: ""
                                     required: true
-                          - variable: scaleCert
-                            label: Select TrueNAS SCALE Certificate
+                          - variable: clusterIssuer
+                            label: Use Cert-Manager clusterIssuer
+                            description: 'add the name of your Cert-Manager clusterIssuer here for automatic tls certificates.'
                             schema:
+                              type: string
+                              default: ""
+                          - variable: scaleCert
+                            label: Use TrueNAS SCALE Certificate (Deprecated)
+                            schema:
+                              show_if: [["clusterIssuer", "=", ""]]
                               type: int
                               $ref:
                                 - "definitions/certificate"
+                          - variable: secretName
+                            label: Use Custom Secret (Advanced)
+                            schema:
+                              type: string
+                              show_if: [["clusterIssuer", "=", ""]]
+                              default: ""
               - variable: entrypoint
                 label: Traefik Entrypoint
                 description: Entrypoint used by Traefik when using Traefik as Ingress Provider
@@ -1176,58 +1217,58 @@ questions:
       $ref:
         - "definitions/gpuConfiguration"
       attrs: []
-  - variable: horizontalPodAutoscaler
-    group: Advanced
-    label: (Advanced) Horizontal Pod Autoscaler
-    schema:
-      type: list
-      default: []
-      items:
-      - variable: hpaEntry
-        label: HPA Entry
-        schema:
-          additional_attrs: true
-          type: dict
-          attrs:
-            - variable: name
-              label: Name
-              schema:
-                type: string
-                required: true
-                default: ""
-            - variable: enabled
-              label: Enabled
-              schema:
-                type: boolean
-                default: false
-                show_subquestions_if: true
-                subquestions:
-                  - variable: target
-                    label: Target
-                    description: Deployment name, Defaults to Main Deployment
-                    schema:
-                      type: string
-                      default: ""
-                  - variable: minReplicas
-                    label: Minimum Replicas
-                    schema:
-                      type: int
-                      default: 1
-                  - variable: maxReplicas
-                    label: Maximum Replicas
-                    schema:
-                      type: int
-                      default: 5
-                  - variable: targetCPUUtilizationPercentage
-                    label: Target CPU Utilization Percentage
-                    schema:
-                      type: int
-                      default: 80
-                  - variable: targetMemoryUtilizationPercentage
-                    label: Target Memory Utilization Percentage
-                    schema:
-                      type: int
-                      default: 80
+#  - variable: horizontalPodAutoscaler
+#    group: Advanced
+#    label: (Advanced) Horizontal Pod Autoscaler
+#    schema:
+#      type: list
+#      default: []
+#      items:
+#      - variable: hpaEntry
+#        label: HPA Entry
+#        schema:
+#          additional_attrs: true
+#          type: dict
+#          attrs:
+#            - variable: name
+#              label: Name
+#              schema:
+#                type: string
+#                required: true
+#                default: ""
+#            - variable: enabled
+#              label: Enabled
+#              schema:
+#                type: boolean
+#                default: false
+#                show_subquestions_if: true
+#                subquestions:
+#                  - variable: target
+#                    label: Target
+#                    description: Deployment name, Defaults to Main Deployment
+#                    schema:
+#                      type: string
+#                      default: ""
+#                  - variable: minReplicas
+#                    label: Minimum Replicas
+#                    schema:
+#                      type: int
+#                      default: 1
+#                  - variable: maxReplicas
+#                    label: Maximum Replicas
+#                    schema:
+#                      type: int
+#                      default: 5
+#                  - variable: targetCPUUtilizationPercentage
+#                    label: Target CPU Utilization Percentage
+#                    schema:
+#                      type: int
+#                      default: 80
+#                  - variable: targetMemoryUtilizationPercentage
+#                    label: Target Memory Utilization Percentage
+#                    schema:
+#                      type: int
+#                      default: 80
   - variable: networkPolicy
     group: Advanced
     label: (Advanced) Network Policy
