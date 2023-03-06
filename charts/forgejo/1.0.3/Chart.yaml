@@ -1,17 +1,17 @@
 apiVersion: v2
-appVersion: "1.18.2"
+appVersion: "1.18.5"
 dependencies:
   - name: common
     repository: https://library-charts.truecharts.org
     version: 11.1.2
-  # - condition: postgresql.enabled
-  #   name: postgresql
-  #   repository: https://charts.truecharts.org/
-  #   version: 11.0.22
+  - condition: postgresql.enabled
+    name: postgresql
+    repository: https://deps.truecharts.org/
+    version: 11.0.31
   - condition: memcached.enabled
     name: memcached
-    repository: https://charts.truecharts.org/
-    version: 5.0.24
+    repository: https://deps.truecharts.org/
+    version: 5.0.31
 deprecated: false
 description: Self hosted GIT repositories
 home: https://github.com/chadweimer/charts/charts/forgejo
@@ -31,4 +31,4 @@ sources:
   - https://codeberg.org/forgejo/forgejo
   - https://codeberg.org/forgejo/-/packages/container/forgejo
 type: application
-version: 1.0.2
+version: 1.0.3
