@@ -1,6 +1,6 @@
 image:
   repository: codeberg.org/forgejo/forgejo
-  tag: 1.19.0-3-rootless@sha256:f05416e9bc7a1df849ea2c6aa3cb4d5731d5966912b483849c8b455cc6ac06d4
+  tag: 1.20.4-0-rootless@sha256:d3a82a000f1d568de70949b19fb0f0a5be759666d4c53a01c86f65469499bdd0
   pullPolicy: IfNotPresent
 
 podSecurityContext:
