@@ -1,0 +1,61 @@
+{
+    "charts": {
+        "gomp": {
+            "app_readme": "<h1>GOMP: GO Meal Planner</h1>\n<p>Web-based recipe book</p>",
+            "categories": [
+                "utilities",
+                "recipes"
+            ],
+            "description": "Web-based recipe book",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/chadweimer/gomp",
+            "location": "/catalog/charts/gomp",
+            "latest_version": "1.3.1",
+            "latest_app_version": "3.6.0",
+            "latest_human_version": "3.6.0_1.3.1",
+            "last_update": "2023-08-13 18:47:48",
+            "name": "gomp",
+            "recommended": false,
+            "title": "Gomp",
+            "maintainers": [],
+            "tags": [],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/chadweimer/gomp",
+                "https://github.com/chadweimer/charts",
+                "https://github.com/users/chadweimer/packages/container/package/gomp"
+            ],
+            "icon_url": "https://github.com/chadweimer/gomp/raw/master/static/src/assets/icon/icon192.png"
+        },
+        "forgejo": {
+            "app_readme": "<h1>Forgejo</h1>\n<p>Beyond coding. We forge.</p>",
+            "categories": [
+                "GIT"
+            ],
+            "description": "Self hosted GIT repositories",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/chadweimer/charts/charts/forgejo",
+            "location": "/catalog/charts/forgejo",
+            "latest_version": "1.0.5",
+            "latest_app_version": "1.20.4",
+            "latest_human_version": "1.20.4_1.0.5",
+            "last_update": "2023-09-11 14:51:20",
+            "name": "forgejo",
+            "recommended": false,
+            "title": "Forgejo",
+            "maintainers": [],
+            "tags": [],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/truecharts/charts/tree/master/charts/stable/gitea",
+                "https://gitea.com/gitea/helm-chart",
+                "https://codeberg.org/forgejo/forgejo",
+                "https://codeberg.org/forgejo/-/packages/container/forgejo"
+            ],
+            "icon_url": "https://codeberg.org/forgejo/forgejo/raw/branch/forgejo/assets/logo.svg"
+        }
+    },
+    "test": {}
+}
