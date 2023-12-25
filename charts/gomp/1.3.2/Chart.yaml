@@ -4,11 +4,11 @@ description: Web-based recipe book
 home: https://github.com/chadweimer/gomp
 icon: https://github.com/chadweimer/gomp/raw/master/static/src/assets/icon/icon192.png
 type: application
-version: 1.3.1
-appVersion: "3.6.0"
+version: 1.3.2
+appVersion: "3.7.0"
 dependencies:
 - name: gomp
-  version: "1.0.2"
+  version: "1.0.3"
   repository: "https://chadweimer.github.io/charts"
 sources:
   - https://github.com/chadweimer/gomp
