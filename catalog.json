@@ -55,6 +55,42 @@
                 "https://codeberg.org/forgejo/-/packages/container/forgejo"
             ],
             "icon_url": "https://codeberg.org/forgejo/forgejo/raw/branch/forgejo/assets/logo.svg"
+        },
+        "omada-controller": {
+            "app_readme": "<h1>Omada Controller</h1>\n<p><a href=\"https://github.com/mbentley/docker-omada-controller\">Omada Controller</a> is a network management controller for Omada (TP-Link) Equipment.</p>",
+            "categories": [
+                "network"
+            ],
+            "description": "Omada Controller (TP-Link) is a network management controller for TP-Link Omada Equipment.",
+            "healthy": true,
+            "healthy_error": null,
+            "home": "https://github.com/mbentley/docker-omada-controller",
+            "location": "/catalog/charts/omada-controller",
+            "latest_version": "1.2.5",
+            "latest_app_version": "5.14.30.7",
+            "latest_human_version": "5.14.30.7_1.2.5",
+            "last_update": "2024-08-25 14:00:00",
+            "name": "omada-controller",
+            "recommended": false,
+            "title": "Omada Controller",
+            "maintainers": [
+                {
+                    "name": "truenas",
+                    "url": "https://www.truenas.com/",
+                    "email": "dev@ixsystems.com"
+                }
+            ],
+            "tags": [
+                "controller",
+                "omada"
+            ],
+            "screenshots": [],
+            "sources": [
+                "https://github.com/mbentley/docker-omada-controller",
+                "https://github.com/truenas/charts/tree/master/library/ix-dev/community/omada-controller",
+                "https://hub.docker.com/r/mbentley/omada-controller"
+            ],
+            "icon_url": "https://media.sys.truenas.net/apps/omada-controller/icons/icon.svg"
         }
     },
     "test": {}
