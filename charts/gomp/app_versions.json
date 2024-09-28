@@ -1,0 +1,888 @@
+{
+    "1.4.0": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/catalog/charts/gomp/1.4.0",
+        "last_update": "2024-09-28 05:16:09",
+        "required_features": [],
+        "human_version": "3.8.1_1.4.0",
+        "version": "1.4.0",
+        "chart_metadata": {
+            "apiVersion": "v2",
+            "name": "gomp",
+            "description": "Web-based recipe book",
+            "home": "https://github.com/chadweimer/gomp",
+            "icon": "https://github.com/chadweimer/gomp/raw/master/static/src/assets/icon/icon192.png",
+            "type": "application",
+            "version": "1.4.0",
+            "appVersion": "3.8.1",
+            "dependencies": [
+                {
+                    "name": "gomp",
+                    "version": "1.1.0",
+                    "repository": "https://chadweimer.github.io/charts"
+                }
+            ],
+            "sources": [
+                "https://github.com/chadweimer/gomp",
+                "https://github.com/chadweimer/charts",
+                "https://github.com/users/chadweimer/packages/container/package/gomp"
+            ],
+            "keywords": [
+                "utilities",
+                "recipes"
+            ]
+        },
+        "app_metadata": null,
+        "schema": {
+            "groups": [
+                {
+                    "name": "Configuration",
+                    "description": "Configuration"
+                }
+            ],
+            "portals": {
+                "open": {
+                    "protocols": [
+                        "http"
+                    ],
+                    "host": [
+                        "$node_ip"
+                    ],
+                    "ports": [
+                        "$variable-gomp.service.nodePort"
+                    ]
+                }
+            },
+            "questions": [
+                {
+                    "variable": "gomp",
+                    "label": "Application Configuration",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "image",
+                                "label": "Container Image",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "tag",
+                                            "label": "Override Tag",
+                                            "schema": {
+                                                "type": "string",
+                                                "default": ""
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "gomp",
+                                "label": "Settings",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "secureKey",
+                                            "label": "Secure Key",
+                                            "description": "Used for encrypting tokens",
+                                            "schema": {
+                                                "type": "string",
+                                                "default": "",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variables",
+                                            "schema": {
+                                                "type": "list",
+                                                "items": [
+                                                    {
+                                                        "variable": "envEntry",
+                                                        "label": "Environment Variable",
+                                                        "schema": {
+                                                            "additional_attrs": true,
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "name",
+                                                                    "label": "Name",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "default": "",
+                                                                        "required": true
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "value",
+                                                                    "label": "Value",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "default": "",
+                                                                        "required": true
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "service",
+                                "label": "Main Service",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "nodePort",
+                                            "label": "Web Port",
+                                            "schema": {
+                                                "type": "int",
+                                                "min": 8000,
+                                                "max": 65535,
+                                                "default": 15000,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "persistence",
+                                "label": "Storage",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "data",
+                                            "label": "Application Data",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "type",
+                                                        "label": "Type of Storage",
+                                                        "description": "Sets the persistence type",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "default": "pvc",
+                                                            "required": true,
+                                                            "enum": [
+                                                                {
+                                                                    "value": "pvc",
+                                                                    "description": "PVC"
+                                                                },
+                                                                {
+                                                                    "value": "hostPath",
+                                                                    "description": "Host Path"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "PVC Size",
+                                                        "description": "Set the PVC size",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "valid_chars": "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$",
+                                                            "default": "1Gi",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "pvc"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "Select the host path",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "required": true,
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "hostPath"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "setResourcesEnabled",
+                                "label": "Set Pod resources",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "show_subquestions_if": true,
+                                    "subquestions": [
+                                        {
+                                            "variable": "resources",
+                                            "label": "Resources",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "limits",
+                                                        "label": "Limits",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "cpu",
+                                                                    "label": "CPU",
+                                                                    "description": "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100.",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "valid_chars": "^\\d+(?:\\.\\d+(?!.*m$)|m?$)",
+                                                                        "default": "1000m"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "memory",
+                                                                    "label": "Memory",
+                                                                    "description": "Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "valid_chars": "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$",
+                                                                        "default": "1Gi"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "postgresql",
+                                "label": "PostgreSQL",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "enabled",
+                                            "label": "Enabled",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false,
+                                                "show_subquestions_if": true,
+                                                "subquestions": [
+                                                    {
+                                                        "variable": "auth",
+                                                        "label": "Authentication",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "password",
+                                                                    "label": "Database Password",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "default": "",
+                                                                        "required": true
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "primary",
+                                                        "label": "Primary",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "persistence",
+                                                                    "label": "Storage",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "enabled",
+                                                                                "label": "Enable Default Storage (PVC)",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": true
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "extraVolumes",
+                                                                    "label": "Extra Host Path Volumes",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "default": [],
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "extraVolumesEntry",
+                                                                                "label": "Custom Volume",
+                                                                                "schema": {
+                                                                                    "additional_attrs": true,
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "name",
+                                                                                            "label": "Volume Name",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "default": "",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "hostPath",
+                                                                                            "label": "Host Path",
+                                                                                            "schema": {
+                                                                                                "type": "dict",
+                                                                                                "attrs": [
+                                                                                                    {
+                                                                                                        "variable": "path",
+                                                                                                        "label": "Path",
+                                                                                                        "description": "Select the host path",
+                                                                                                        "schema": {
+                                                                                                            "type": "hostpath",
+                                                                                                            "required": true
+                                                                                                        }
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "extraVolumeMounts",
+                                                                    "label": "Extra Host Path Volume Mounts",
+                                                                    "description": "MUST have a corresponding Host Path Volume defined",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "default": [],
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "extraVolumeMountsEntry",
+                                                                                "label": "Custom Volume Mount",
+                                                                                "schema": {
+                                                                                    "additional_attrs": true,
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "name",
+                                                                                            "label": "Volume Name",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "default": "",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "mountPath",
+                                                                                            "label": "Mount Path",
+                                                                                            "schema": {
+                                                                                                "type": "path",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "subPath",
+                                                                                            "label": "Mount Sub-Path",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "default": ""
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>GOMP: GO Meal Planner</h1>\n<p>Web-based recipe book</p>",
+        "detailed_readme": "<h1>GOMP: GO Meal Planner</h1>\n<p>Web-based recipe book.</p>",
+        "changelog": null
+    },
+    "1.3.4": {
+        "healthy": true,
+        "supported": true,
+        "healthy_error": null,
+        "location": "/catalog/charts/gomp/1.3.4",
+        "last_update": "2023-12-28 04:55:30",
+        "required_features": [],
+        "human_version": "3.8.1_1.3.4",
+        "version": "1.3.4",
+        "chart_metadata": {
+            "apiVersion": "v2",
+            "name": "gomp",
+            "description": "Web-based recipe book",
+            "home": "https://github.com/chadweimer/gomp",
+            "icon": "https://github.com/chadweimer/gomp/raw/master/static/src/assets/icon/icon192.png",
+            "type": "application",
+            "version": "1.3.4",
+            "appVersion": "3.8.1",
+            "dependencies": [
+                {
+                    "name": "gomp",
+                    "version": "1.0.5",
+                    "repository": "https://chadweimer.github.io/charts"
+                }
+            ],
+            "sources": [
+                "https://github.com/chadweimer/gomp",
+                "https://github.com/chadweimer/charts",
+                "https://github.com/users/chadweimer/packages/container/package/gomp"
+            ],
+            "keywords": [
+                "utilities",
+                "recipes"
+            ]
+        },
+        "app_metadata": null,
+        "schema": {
+            "groups": [
+                {
+                    "name": "Configuration",
+                    "description": "Configuration"
+                }
+            ],
+            "portals": {
+                "open": {
+                    "protocols": [
+                        "http"
+                    ],
+                    "host": [
+                        "$node_ip"
+                    ],
+                    "ports": [
+                        "$variable-gomp.service.nodePort"
+                    ]
+                }
+            },
+            "questions": [
+                {
+                    "variable": "gomp",
+                    "label": "Application Configuration",
+                    "group": "Configuration",
+                    "schema": {
+                        "type": "dict",
+                        "attrs": [
+                            {
+                                "variable": "image",
+                                "label": "Container Image",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "tag",
+                                            "label": "Override Tag",
+                                            "schema": {
+                                                "type": "string",
+                                                "default": ""
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "gomp",
+                                "label": "Settings",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "secureKey",
+                                            "label": "Secure Key",
+                                            "description": "Used for encrypting tokens",
+                                            "schema": {
+                                                "type": "string",
+                                                "default": "",
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "env",
+                                            "label": "Environment Variables",
+                                            "schema": {
+                                                "type": "list",
+                                                "items": [
+                                                    {
+                                                        "variable": "envEntry",
+                                                        "label": "Environment Variable",
+                                                        "schema": {
+                                                            "additional_attrs": true,
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "name",
+                                                                    "label": "Name",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "default": "",
+                                                                        "required": true
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "value",
+                                                                    "label": "Value",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "default": "",
+                                                                        "required": true
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "service",
+                                "label": "Main Service",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "nodePort",
+                                            "label": "Web Port",
+                                            "schema": {
+                                                "type": "int",
+                                                "min": 8000,
+                                                "max": 65535,
+                                                "default": 15000,
+                                                "required": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "persistence",
+                                "label": "Storage",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "data",
+                                            "label": "Application Data",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "type",
+                                                        "label": "Type of Storage",
+                                                        "description": "Sets the persistence type",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "default": "pvc",
+                                                            "required": true,
+                                                            "enum": [
+                                                                {
+                                                                    "value": "pvc",
+                                                                    "description": "PVC"
+                                                                },
+                                                                {
+                                                                    "value": "hostPath",
+                                                                    "description": "Host Path"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "size",
+                                                        "label": "PVC Size",
+                                                        "description": "Set the PVC size",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "valid_chars": "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$",
+                                                            "default": "1Gi",
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "pvc"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "hostPath",
+                                                        "label": "Host Path",
+                                                        "description": "Select the host path",
+                                                        "schema": {
+                                                            "type": "hostpath",
+                                                            "required": true,
+                                                            "show_if": [
+                                                                [
+                                                                    "type",
+                                                                    "=",
+                                                                    "hostPath"
+                                                                ]
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "setResourcesEnabled",
+                                "label": "Set Pod resources",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false,
+                                    "show_subquestions_if": true,
+                                    "subquestions": [
+                                        {
+                                            "variable": "resources",
+                                            "label": "Resources",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "limits",
+                                                        "label": "Limits",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "cpu",
+                                                                    "label": "CPU",
+                                                                    "description": "CPU resource limit allow  plain integer values with suffix m(milli) e.g 1000m, 100.",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "valid_chars": "^\\d+(?:\\.\\d+(?!.*m$)|m?$)",
+                                                                        "default": "1000m"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "memory",
+                                                                    "label": "Memory",
+                                                                    "description": "Memory limits is specified by number of bytes. Followed by quantity suffix like E,P,T,G,M,k and Ei,Pi,Ti,Mi,Gi,Ki can also be used. e.g 129e6, 129M,  128974848000m, 123Mi",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "valid_chars": "^([+-]?[0-9.]+)([eEinumkKMGTP]*[-+]?[0-9]*)$",
+                                                                        "default": "1Gi"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "postgresql",
+                                "label": "PostgreSQL",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "enabled",
+                                            "label": "Enabled",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false,
+                                                "show_subquestions_if": true,
+                                                "subquestions": [
+                                                    {
+                                                        "variable": "auth",
+                                                        "label": "Authentication",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "password",
+                                                                    "label": "Database Password",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "default": "",
+                                                                        "required": true
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "primary",
+                                                        "label": "Primary",
+                                                        "schema": {
+                                                            "type": "dict",
+                                                            "attrs": [
+                                                                {
+                                                                    "variable": "persistence",
+                                                                    "label": "Storage",
+                                                                    "schema": {
+                                                                        "type": "dict",
+                                                                        "attrs": [
+                                                                            {
+                                                                                "variable": "enabled",
+                                                                                "label": "Enable Default Storage (PVC)",
+                                                                                "schema": {
+                                                                                    "type": "boolean",
+                                                                                    "default": true
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "extraVolumes",
+                                                                    "label": "Extra Host Path Volumes",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "default": [],
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "extraVolumesEntry",
+                                                                                "label": "Custom Volume",
+                                                                                "schema": {
+                                                                                    "additional_attrs": true,
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "name",
+                                                                                            "label": "Volume Name",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "default": "",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "hostPath",
+                                                                                            "label": "Host Path",
+                                                                                            "schema": {
+                                                                                                "type": "dict",
+                                                                                                "attrs": [
+                                                                                                    {
+                                                                                                        "variable": "path",
+                                                                                                        "label": "Path",
+                                                                                                        "description": "Select the host path",
+                                                                                                        "schema": {
+                                                                                                            "type": "hostpath",
+                                                                                                            "required": true
+                                                                                                        }
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "variable": "extraVolumeMounts",
+                                                                    "label": "Extra Host Path Volume Mounts",
+                                                                    "description": "MUST have a corresponding Host Path Volume defined",
+                                                                    "schema": {
+                                                                        "type": "list",
+                                                                        "default": [],
+                                                                        "items": [
+                                                                            {
+                                                                                "variable": "extraVolumeMountsEntry",
+                                                                                "label": "Custom Volume Mount",
+                                                                                "schema": {
+                                                                                    "additional_attrs": true,
+                                                                                    "type": "dict",
+                                                                                    "attrs": [
+                                                                                        {
+                                                                                            "variable": "name",
+                                                                                            "label": "Volume Name",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "default": "",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "mountPath",
+                                                                                            "label": "Mount Path",
+                                                                                            "schema": {
+                                                                                                "type": "path",
+                                                                                                "required": true
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "variable": "subPath",
+                                                                                            "label": "Mount Sub-Path",
+                                                                                            "schema": {
+                                                                                                "type": "string",
+                                                                                                "default": ""
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "app_readme": "<h1>GOMP: GO Meal Planner</h1>\n<p>Web-based recipe book</p>",
+        "detailed_readme": "<h1>GOMP: GO Meal Planner</h1>\n<p>Web-based recipe book.</p>",
+        "changelog": null
+    }
+}
