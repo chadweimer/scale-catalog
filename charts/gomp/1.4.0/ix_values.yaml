@@ -1,0 +1,75 @@
+gomp:
+  
+  podSecurityContext:
+    fsGroup: 568
+  
+  securityContext:
+    runAsUser: 568
+
+  service:
+    type: NodePort
+
+  ingress:
+    enabled: false
+    className: ""
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 100m
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+    hosts:
+      - host: gomp.local
+        paths:
+          - path: /
+            pathType: Prefix
+    tls: []
+    #  - secretName: gomp-tls
+    #    hosts:
+    #      - gomp.local
+
+  persistence:
+    data:
+      enabled: true
+
+  gomp:
+    aws:
+      auth:
+        accessKeyId: ""
+        secretAccessKey: ""
+      bucket: ""
+      region: ""
+    backups:
+      db: []
+        # - name: daily
+        #   schedule: "0 3 * * *"
+        #   destination:
+        #     type: s3
+        #     bucket: name-of-bucket
+        # - name: weekly
+        #   schedule: "0 3 * * 0"
+        #   destination:
+        #     type: nfs
+        #     server: 1.2.3.4
+        #     path: /path/to/share
+        #     subPath: sub/path
+      data: []
+        # - name: daily
+        #   schedule: "0 3 * * *"
+        #   destination:
+        #     type: s3
+        #     bucket: name-of-bucket
+        # - name: weekly
+        #   schedule: "0 3 * * 0"
+        #   destination:
+        #     type: nfs
+        #     server: 1.2.3.4
+        #     path: /path/to/share
+        #     subPath: sub/path
+
+  postgresql:
+    primary:
+      podSecurityContext:
+        enabled: true
+        fsGroup: 568
+      containerSecurityContext:
+        enabled: true
+        runAsUser: 568
