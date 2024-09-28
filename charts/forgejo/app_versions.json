@@ -6,11 +6,11 @@
         "location": "/catalog/charts/forgejo/1.0.5",
         "last_update": "2023-09-11 14:51:20",
         "required_features": [
-            "normalize/interfaceConfiguration",
             "definitions/timezone",
-            "definitions/gpuConfiguration",
             "definitions/nodeIP",
+            "normalize/interfaceConfiguration",
             "definitions/interface",
+            "definitions/gpuConfiguration",
             "definitions/certificate"
         ],
         "human_version": "1.20.4_1.0.5",
